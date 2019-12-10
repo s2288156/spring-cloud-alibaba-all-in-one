@@ -5,6 +5,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>nacos-config-example</module>
+        <module>rocketmq-produce-example</module>
+        <module>rocketmq-condume-example</module>
+        <module>rocketmq-consume-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
