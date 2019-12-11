@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: rocketmq-produce-example
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.30.204:9876
+      bindings:
+        output1:
+          destination: test-topic1
+          content-type: application/json
+        output2:
+          destination: test-topic2
+          content-type: text/plain
+server:
+  port: 28080

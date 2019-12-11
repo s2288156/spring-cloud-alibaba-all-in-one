@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: rocketmq-consume-example
+  cloud:
+    stream:
+      bindings:
+        input1:
+          destination: test-topic1
+          content-type: application/json
+          group: test-group1
+      rocketmq:
+        binder:
+          name-server: 192.168.30.204:9876
+        bindings:
+          input1:
+            cousumer:
+              tags: tagStr1
+              orderly: true
+server:
+  port: 28088

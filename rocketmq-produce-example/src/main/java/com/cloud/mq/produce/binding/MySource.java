@@ -10,4 +10,7 @@ public interface MySource {
 
     @Output("output1")
     MessageChannel output1();
+
+    @Output("output2")
+    MessageChannel output2();
 }

@@ -1,11 +1,7 @@
 package com.cloud.mq.produce;
 
 import com.cloud.mq.produce.binding.MySource;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.MessageConst;
-import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +10,6 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author wcy
@@ -32,24 +25,22 @@ public class RocketMqProduceApp {
     @Autowired
     private MySource source;
 
-    @GetMapping("/send")
-    public Message send(String msg) {
-        Map<String, Object> headers = new HashMap<>();
-        headers.put(MessageConst.PROPERTY_TAGS, "tagStr");
-        Message message = MessageBuilder.withPayload(msg).setHeader(MessageConst.PROPERTY_TAGS, "tagStr").build();
+    @GetMapping("/send1")
+    public Message<String> send1(String msg, String tag) {
+        Message<String> message = MessageBuilder.withPayload(msg).
+                setHeader(MessageConst.PROPERTY_TAGS, tag).
+                build();
         source.output1().send(message);
         return message;
     }
 
-    @GetMapping("/send1")
-    public void send1(String msg) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        DefaultMQProducer producer = new DefaultMQProducer("producer_group11");
-        producer.setNamesrvAddr("192.168.30.204:9876");
-        producer.start();
-        org.apache.rocketmq.common.message.Message message = new org.apache.rocketmq.common.message.Message("test-topic", "tagStr", "message from rocketmq producer".getBytes());
-        producer.send(message);
-        System.out.println(message);
-        producer.shutdown();
+    @GetMapping("/send2")
+    public Message<String> send2(String msg, String tag) {
+        Message<String> message = MessageBuilder.withPayload(msg).
+                setHeader(MessageConst.PROPERTY_TAGS, tag).
+                build();
+        source.output2().send(message);
+        return message;
     }
 
 }
