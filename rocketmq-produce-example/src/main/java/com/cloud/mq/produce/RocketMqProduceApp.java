@@ -43,12 +43,13 @@ public class RocketMqProduceApp {
 
     @GetMapping("/send1")
     public void send1(String msg) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        DefaultMQProducer producer = new DefaultMQProducer("producer_group");
+        DefaultMQProducer producer = new DefaultMQProducer("producer_group11");
         producer.setNamesrvAddr("192.168.30.204:9876");
         producer.start();
         org.apache.rocketmq.common.message.Message message = new org.apache.rocketmq.common.message.Message("test-topic", "tagStr", "message from rocketmq producer".getBytes());
         producer.send(message);
         System.out.println(message);
+        producer.shutdown();
     }
 
 }
