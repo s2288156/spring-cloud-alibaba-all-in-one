@@ -6,15 +6,23 @@ spring:
       bindings:
         input1:
           destination: test-topic1
-          content-type: application/json
+          content-type: text/plain
           group: test-group1
+          consumer:
+            concurrency: 1
+        input2:
+          destination: test-topic2
+          content-type: text/plain
+          group: test-group2
+          consumer:
+            concurrency: 10
       rocketmq:
         binder:
           name-server: 192.168.30.204:9876
-        bindings:
-          input1:
-            cousumer:
-              tags: tagStr1
-              orderly: true
+#        bindings:
+#          input1:
+#            consumer:
+#              tags: tag1
+#              orderly: true
 server:
   port: 28088

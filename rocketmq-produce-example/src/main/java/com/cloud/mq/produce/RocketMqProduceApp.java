@@ -1,6 +1,7 @@
 package com.cloud.mq.produce;
 
 import com.cloud.mq.produce.binding.MySource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author wcy
  */
+@Slf4j
 @RestController
 @SpringBootApplication
 @EnableBinding({MySource.class})
@@ -26,21 +28,29 @@ public class RocketMqProduceApp {
     private MySource source;
 
     @GetMapping("/send1")
-    public Message<String> send1(String msg, String tag) {
+    public Object send1(String msg, String tag) {
         Message<String> message = MessageBuilder.withPayload(msg).
                 setHeader(MessageConst.PROPERTY_TAGS, tag).
                 build();
-        source.output1().send(message);
-        return message;
+        boolean send = source.output1().send(message);
+        log.info("{}", send);
+        if (send) {
+            return message;
+        }
+        return "send fail";
     }
 
     @GetMapping("/send2")
-    public Message<String> send2(String msg, String tag) {
+    public Object send2(String msg, String tag) {
         Message<String> message = MessageBuilder.withPayload(msg).
                 setHeader(MessageConst.PROPERTY_TAGS, tag).
                 build();
-        source.output2().send(message);
-        return message;
+        boolean send = source.output2().send(message);
+        log.info("{}", send);
+        if (send) {
+            return message;
+        }
+        return "send fail";
     }
 
 }
