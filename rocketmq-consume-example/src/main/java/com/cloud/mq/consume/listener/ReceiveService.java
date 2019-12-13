@@ -19,6 +19,6 @@ public class ReceiveService {
 
     @StreamListener("input2")
     public void receiveInput2(Message<String> receiveMsg) {
-        log.info("input2 receive: {}", receiveMsg.getPayload());
+        log.info("input2 receive: {} : {}", System.currentTimeMillis(), receiveMsg.getPayload());
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 /**
  * @author wcy
  */
@@ -41,9 +43,11 @@ public class RocketMqProduceApp {
     }
 
     @GetMapping("/send2")
-    public Object send2(String msg, String tag) {
+    public Object send2(String msg, String tag, Integer delay) {
+        log.info("{}", System.currentTimeMillis());
         Message<String> message = MessageBuilder.withPayload(msg).
                 setHeader(MessageConst.PROPERTY_TAGS, tag).
+                setHeader(MessageConst.PROPERTY_DELAY_TIME_LEVEL, delay).
                 build();
         boolean send = source.output2().send(message);
         log.info("{}", send);
