@@ -8,6 +8,8 @@
         <module>rocketmq-produce-example</module>
         <module>rocketmq-condume-example</module>
         <module>rocketmq-consume-example</module>
+        <module>rabbitmq-produce-example</module>
+        <module>rabbitmq-consume-example</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
