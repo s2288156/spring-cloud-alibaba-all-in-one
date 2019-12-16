@@ -1,5 +1,6 @@
 package com.cloud.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,17 +22,24 @@ public class ConfigApp {
     @Value("${refresh}")
     private String refresh;
 
-    @Value("${user}")
-    private String user;
+    @Autowired
+    private BeiJingProp beiJingProp;
+
+    @Autowired
+    private ShangHaiProp shangHaiProp;
 
     @GetMapping("/refresh")
     public String refresh() {
         return refresh;
     }
 
-    @GetMapping("/user")
-    public String user() {
-        return user;
+    @GetMapping("/beijing")
+    public BeiJingProp beijing() {
+        return beiJingProp;
     }
 
+    @GetMapping("/shanghai")
+    public ShangHaiProp shanghai() {
+        return shangHaiProp;
+    }
 }

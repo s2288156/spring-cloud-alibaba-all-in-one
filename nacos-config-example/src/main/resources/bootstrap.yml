@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: nacos-config-example
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.30.204:8848
+        file-extension: yml
+        namespace: ${namespace}
+        ext-config:
+          - data-id: common.yml
+            group: DEFAULT_GROUP
+            refresh: true
+          - data-id: immutable.yml
+            group: DEFAULT_GROUP
+            refresh: false
