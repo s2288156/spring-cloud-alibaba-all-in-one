@@ -31,6 +31,7 @@
         <spring-cloud-openfeign.version>2.1.2.RELEASE</spring-cloud-openfeign.version>
         <spring-cloud-gateway.version>2.1.2.RELEASE</spring-cloud-gateway.version>
 
+        <fastjson-version>1.2.62</fastjson-version>
     </properties>
 
     <dependencyManagement>
@@ -66,6 +67,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -73,6 +80,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
 
         <dependency>
