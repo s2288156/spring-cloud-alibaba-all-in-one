@@ -12,4 +12,6 @@ public class MyMessage implements Serializable {
     private String data;
 
     private String createTime;
+
+    private String topic;
 }
