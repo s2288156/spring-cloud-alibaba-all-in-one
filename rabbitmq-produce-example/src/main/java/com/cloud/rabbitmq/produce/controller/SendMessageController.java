@@ -2,6 +2,7 @@ package com.cloud.rabbitmq.produce.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.cloud.rabbitmq.produce.config.DirectRabbitConfig;
+import com.cloud.rabbitmq.produce.config.FanoutRabbitConfig;
 import com.cloud.rabbitmq.produce.config.TopicRabbitConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -43,6 +44,7 @@ public class SendMessageController {
         rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, TOPIC_MAN, JSON.toJSONString(myMessage));
         return myMessage.toString();
     }
+
     @GetMapping("/topic/woman")
     public MyMessage sendTopicWoman(String msg) {
         MyMessage myMessage = new MyMessage();
@@ -50,6 +52,15 @@ public class SendMessageController {
         myMessage.setTopic(TOPIC_WOMAN);
 
         rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, TOPIC_WOMAN, JSON.toJSONString(myMessage));
+        return myMessage;
+    }
+
+    @GetMapping("/fanout_msg")
+    public MyMessage sendFanoutMsg(String msg) {
+        MyMessage myMessage = new MyMessage();
+        myMessage.setData(msg);
+
+        rabbitTemplate.convertAndSend(FanoutRabbitConfig.FANOUT_EXCHANGE, null, JSON.toJSONString(myMessage));
         return myMessage;
     }
 
