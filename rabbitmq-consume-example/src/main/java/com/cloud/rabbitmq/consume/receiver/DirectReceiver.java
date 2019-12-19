@@ -5,8 +5,6 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 import static com.cloud.rabbitmq.consume.config.RabbitConst.*;
 
 /**
@@ -14,7 +12,7 @@ import static com.cloud.rabbitmq.consume.config.RabbitConst.*;
  */
 @Slf4j
 @Component
-@RabbitListener(queues = TEST_DIRECT_QUEUE)
+@RabbitListener(queues = QUEUE_DIRECT_A)
 public class DirectReceiver {
 
     @RabbitHandler

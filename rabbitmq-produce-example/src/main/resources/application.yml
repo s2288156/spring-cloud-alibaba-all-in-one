@@ -5,5 +5,7 @@ spring:
     addresses: 192.168.30.204:5672
     username: admin
     password: admin
+#    publisher-confirms: true # 确认消息已发送到交换机
+#    publisher-returns: true # 确认消息已发送到队列
 server:
   port: 10000

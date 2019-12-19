@@ -1,8 +1,13 @@
 package com.cloud.rabbitmq.produce.config;
 
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import static com.cloud.rabbitmq.produce.config.RabbitConst.*;
 
 /**
  * @author wcy
@@ -10,29 +15,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FanoutRabbitConfig {
 
-    public static final String QUEUE_A = "queue.a";
-    public static final String QUEUE_B = "queue.b";
-    public static final String QUEUE_C = "queue.c";
-    public static final String FANOUT_EXCHANGE = "fanoutExchange";
 
     @Bean
     public Queue queueA() {
-        return new Queue(QUEUE_A);
+        return new Queue(QUEUE_FANOUT_A);
     }
 
     @Bean
     public Queue queueB() {
-        return new Queue(QUEUE_B);
+        return new Queue(QUEUE_FANOUT_B);
     }
 
     @Bean
     public Queue queueC() {
-        return new Queue(QUEUE_C);
+        return new Queue(QUEUE_FANOUT_C);
     }
 
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange(FANOUT_EXCHANGE);
+        return new FanoutExchange(EXCHANGE_FANOUT);
     }
 
     @Bean

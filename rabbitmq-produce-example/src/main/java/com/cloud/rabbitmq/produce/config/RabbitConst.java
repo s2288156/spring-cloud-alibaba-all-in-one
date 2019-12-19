@@ -1,4 +1,4 @@
-package com.cloud.rabbitmq.consume.config;
+package com.cloud.rabbitmq.produce.config;
 
 /**
  * @author wcy

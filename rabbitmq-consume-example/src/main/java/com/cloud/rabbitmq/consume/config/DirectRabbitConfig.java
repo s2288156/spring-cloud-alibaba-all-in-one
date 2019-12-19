@@ -15,19 +15,19 @@ import static com.cloud.rabbitmq.consume.config.RabbitConst.*;
 public class DirectRabbitConfig {
 
     @Bean
-    public Queue testDirectQueue() {
-        return new Queue(TEST_DIRECT_QUEUE, true);
+    public Queue directQueueA() {
+        return new Queue(QUEUE_DIRECT_A, true);
     }
 
     @Bean
-    public DirectExchange testDirectExchange() {
-        return new DirectExchange(TEST_DIRECT_EXCHANGE);
+    public DirectExchange directExchange() {
+        return new DirectExchange(EXCHANGE_DIRECT);
     }
 
     @Bean
     public Binding bindingDirect() {
-        return BindingBuilder.bind(testDirectQueue())
-                .to(testDirectExchange())
-                .with(TEST_DIRECT_ROUTING);
+        return BindingBuilder.bind(directQueueA())
+                .to(directExchange())
+                .with(ROUTING_KEY_DIRECT);
     }
 }

@@ -7,30 +7,28 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static com.cloud.rabbitmq.produce.config.RabbitConst.*;
+
 /**
  * @author wcy
  */
 @Configuration
 public class DirectRabbitConfig {
 
-    public static final String TEST_DIRECT_QUEUE = "test-direct-queue";
-    public static final String TEST_DIRECT_EXCHANGE = "test-direct-exchange";
-    public static final String TEST_DIRECT_ROUTING = "test-direct-routing";
-
     @Bean
-    public Queue testDirectQueue() {
-        return new Queue(TEST_DIRECT_QUEUE, true);
+    public Queue directQueueA() {
+        return new Queue(QUEUE_DIRECT_A, true);
     }
 
     @Bean
-    public DirectExchange testDirectExchange() {
-        return new DirectExchange(TEST_DIRECT_EXCHANGE);
+    public DirectExchange directExchange() {
+        return new DirectExchange(EXCHANGE_DIRECT);
     }
 
     @Bean
     public Binding bindingDirect() {
-        return BindingBuilder.bind(testDirectQueue())
-                .to(testDirectExchange())
-                .with(TEST_DIRECT_ROUTING);
+        return BindingBuilder.bind(directQueueA())
+                .to(directExchange())
+                .with(ROUTING_KEY_DIRECT);
     }
 }

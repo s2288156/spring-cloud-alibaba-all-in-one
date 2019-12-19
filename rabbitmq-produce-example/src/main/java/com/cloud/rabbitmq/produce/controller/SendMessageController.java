@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.cloud.rabbitmq.produce.config.TopicRabbitConfig.*;
+import static com.cloud.rabbitmq.produce.config.RabbitConst.*;
 
 /**
  * @author wcy
@@ -31,7 +31,7 @@ public class SendMessageController {
         message.setData(msg);
         message.setCreateTime(LocalDateTime.now().toString());
 
-        rabbitTemplate.convertAndSend(DirectRabbitConfig.TEST_DIRECT_EXCHANGE, DirectRabbitConfig.TEST_DIRECT_ROUTING, JSON.toJSONString(message));
+        rabbitTemplate.convertAndSend(EXCHANGE_DIRECT, ROUTING_KEY_DIRECT, JSON.toJSONString(message));
         return message.toString();
     }
 
@@ -39,9 +39,9 @@ public class SendMessageController {
     public String sendTopicMan(String msg) {
         MyMessage myMessage = new MyMessage();
         myMessage.setData(msg);
-        myMessage.setTopic(TOPIC_MAN);
+        myMessage.setTopic(ROUTING_KEY_MAN);
 
-        rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, TOPIC_MAN, JSON.toJSONString(myMessage));
+        rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, ROUTING_KEY_MAN, JSON.toJSONString(myMessage));
         return myMessage.toString();
     }
 
@@ -49,9 +49,9 @@ public class SendMessageController {
     public MyMessage sendTopicWoman(String msg) {
         MyMessage myMessage = new MyMessage();
         myMessage.setData(msg);
-        myMessage.setTopic(TOPIC_WOMAN);
+        myMessage.setTopic(ROUTING_KEY_WOMAN);
 
-        rabbitTemplate.convertAndSend(TOPIC_EXCHANGE, TOPIC_WOMAN, JSON.toJSONString(myMessage));
+        rabbitTemplate.convertAndSend(EXCHANGE_TOPIC, ROUTING_KEY_WOMAN, JSON.toJSONString(myMessage));
         return myMessage;
     }
 
@@ -60,7 +60,7 @@ public class SendMessageController {
         MyMessage myMessage = new MyMessage();
         myMessage.setData(msg);
 
-        rabbitTemplate.convertAndSend(FanoutRabbitConfig.FANOUT_EXCHANGE, null, JSON.toJSONString(myMessage));
+        rabbitTemplate.convertAndSend(EXCHANGE_FANOUT, null, JSON.toJSONString(myMessage));
         return myMessage;
     }
 

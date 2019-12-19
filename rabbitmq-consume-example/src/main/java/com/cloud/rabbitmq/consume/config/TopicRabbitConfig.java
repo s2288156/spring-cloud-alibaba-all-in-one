@@ -7,38 +7,42 @@ import org.springframework.amqp.core.TopicExchange;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static com.cloud.rabbitmq.consume.config.RabbitConst.*;
+
 /**
  * @author wcy
  */
 @Configuration
 public class TopicRabbitConfig {
-    public static final String TOPIC_MAN = "topic.man";
-    public static final String TOPIC_WOMAN = "topic.woman";
-    public static final String TOPIC_EXCHANGE = "topicExchange";
 
     @Bean
-    public Queue manQueue() {
-        return new Queue(TOPIC_MAN);
+    public Queue topicQueueA() {
+        return new Queue(QUEUE_TOPIC_A);
     }
 
     @Bean
-    public Queue womanQueue() {
-        return new Queue(TOPIC_WOMAN);
+    public Queue topicQueueB() {
+        return new Queue(QUEUE_TOPIC_B);
     }
 
     @Bean
     public TopicExchange exchange() {
-        return new TopicExchange(TOPIC_EXCHANGE);
+        return new TopicExchange(EXCHANGE_TOPIC);
     }
 
     @Bean
     public Binding bindingManExchangeMessage() {
-        return BindingBuilder.bind(manQueue()).to(exchange()).with(TOPIC_MAN);
+        return BindingBuilder.bind(topicQueueA()).to(exchange()).with(ROUTING_KEY_MAN);
+    }
+
+    @Bean
+    public Binding bindingWomanExchangeMessage() {
+        return BindingBuilder.bind(topicQueueA()).to(exchange()).with(ROUTING_KEY_WOMAN);
     }
 
     @Bean
     public Binding bindingAllExchangeMessage() {
-        return BindingBuilder.bind(womanQueue()).to(exchange()).with("topic.#");
+        return BindingBuilder.bind(topicQueueB()).to(exchange()).with("topic.#");
     }
 
 }
