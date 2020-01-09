@@ -3,3 +3,8 @@ server:
 spring:
   application:
     name: kafka-consume
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: foo
+      auto-offset-reset: earliest
