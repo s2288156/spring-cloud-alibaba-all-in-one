@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: dubbo-consumer-zk
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    zookeeper:
+      enabled: false
+server:
+  port: 19001
+dubbo:
+  registry:
+    address: zookeeper://192.168.30.201:3181,192.168.30.201:3182,192.168.30.201:3183
+  cloud:
+    subscribed-services: dubbo-provider-zk

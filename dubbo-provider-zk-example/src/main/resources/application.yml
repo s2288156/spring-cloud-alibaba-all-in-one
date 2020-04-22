@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: dubbo-provider-zk
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    zookeeper:
+      enabled: false
+dubbo:
+  scan:
+    base-packages: com.cloud.dubbo.service
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://192.168.30.201:3181,192.168.30.201:3182,192.168.30.201:3183
+server:
+  port: 19000
