@@ -14,5 +14,6 @@ spring:
           - data-id: config-example-immutable.yml
             group: DEFAULT_GROUP
             refresh: false
+
 server:
   port: 18080
