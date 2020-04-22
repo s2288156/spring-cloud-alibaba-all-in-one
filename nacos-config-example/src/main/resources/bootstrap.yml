@@ -4,13 +4,15 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 192.168.30.204:8848
+        server-addr: 192.168.30.203:8848
         file-extension: yml
-        namespace: ${namespace}
+        namespace: 4f350fcb-cdc4-453b-8f11-d02ac94dcb89
         ext-config:
-          - data-id: common.yml
+          - data-id: config-example-common.yml  # 必须带上.yml的后缀，与配置中心一致
             group: DEFAULT_GROUP
             refresh: true
-          - data-id: immutable.yml
+          - data-id: config-example-immutable.yml
             group: DEFAULT_GROUP
             refresh: false
+server:
+  port: 18080
