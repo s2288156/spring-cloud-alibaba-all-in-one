@@ -15,5 +15,6 @@ dubbo:
     port: -1
   registry:
     address: zookeeper://192.168.30.201:3181,192.168.30.201:3182,192.168.30.201:3183
+    subscribe: false
 server:
   port: 19000

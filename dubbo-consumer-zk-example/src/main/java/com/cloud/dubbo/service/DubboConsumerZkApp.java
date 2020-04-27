@@ -1,5 +1,6 @@
 package com.cloud.dubbo.service;
 
+import com.cloud.dubbo.service.api.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,8 @@ public class DubboConsumerZkApp {
     @GetMapping("/consumer/{id}")
     public User getUser(@PathVariable String id) {
         log.info("this is dubbo consumer web");
-        return userService.getUser(id);
+        QueryUser queryUser = new QueryUser();
+        queryUser.setId(id);
+        return userService.getUser(queryUser);
     }
 }

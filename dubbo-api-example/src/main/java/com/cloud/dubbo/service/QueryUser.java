@@ -2,6 +2,7 @@ package com.cloud.dubbo.service;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -10,13 +11,11 @@ import java.io.Serializable;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class User extends AbstractBaseReq implements Serializable {
+@ToString(callSuper = true)
+public class QueryUser extends AbstractBaseReq implements Serializable {
 
-    private static final long serialVersionUID = 9165191186357693888L;
+    private static final long serialVersionUID = 5254321424562151849L;
 
     private String id;
 
-    private String name;
-
-    private Integer age;
 }
