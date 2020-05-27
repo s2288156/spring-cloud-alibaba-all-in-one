@@ -25,12 +25,13 @@ public class LogAspect {
 
     @Before(value = "pointcut()")
     public void before(JoinPoint joinPoint) {
-        final String threadId = MDC.get("threadId");
         Object[] args = joinPoint.getArgs();
-//        args[0] = threadId;
-
         log.error("args = {}", Arrays.toString(args));
-
+        AbstractBaseReq abstractBaseReq = (AbstractBaseReq) args[0];
+        String threadId = abstractBaseReq.getThreadId();
+        log.error("threadId = {}", threadId);
+        MDC.clear();
+        MDC.put("threadId", threadId);
 
     }
 }
